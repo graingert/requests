@@ -10,9 +10,14 @@ python:
   # - "pypy"  -- appears to hang
   # - "pypy3"
 # command to install dependencies
+matrix:
+  include:
+    - python: 3.6
+      script: make flake8
 install: "make"
 # command to run tests
 script:
   - make coverage
 after_success:
   - pipenv run codecov
+cache: pip
