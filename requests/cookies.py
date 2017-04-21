@@ -306,8 +306,11 @@ class RequestsCookieJar(cookielib.CookieJar, collections.MutableMapping):
         """
         dictionary = {}
         for cookie in iter(self):
-            if (domain is None or cookie.domain == domain) and (path is None
-                                                or cookie.path == path):
+            valid_cookie = (
+                (domain is None or cookie.domain == domain) and
+                (path is None or cookie.path == path)
+            )
+            if valid_cookie:
                 dictionary[cookie.name] = cookie.value
         return dictionary
 
